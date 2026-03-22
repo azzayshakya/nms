@@ -14,8 +14,34 @@ import { ThemeProvider } from "./theme/ThemeProvider";
 
 function AppContent() {
   const { theme } = useTheme();
-  const { colors, fonts } = theme;
+  const { colors, fonts, transitions } = theme;
+  const footerStyle = {
+    borderTop: `1px solid ${colors.border}`,
+    padding: "2rem 2.5rem",
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+    flexWrap: "wrap",
+    gap: "12px",
+  };
 
+  const creditStyle = {
+    fontFamily: fonts.body,
+    fontSize: "0.82rem",
+    color: colors.textTertiary,
+    display: "flex",
+    alignItems: "center",
+    gap: "5px",
+  };
+
+  const creditLinkStyle = {
+    color: colors.textSecondary,
+    textDecoration: "none",
+    fontWeight: 500,
+    borderBottom: `1px solid ${colors.border}`,
+    paddingBottom: "1px",
+    transition: `color ${transitions.fast}, border-color ${transitions.fast}`,
+  };
   return (
     <div
       style={{
@@ -36,17 +62,7 @@ function AppContent() {
         <InterestCheck />
         <ContactForm />
       </main>
-      <footer
-        style={{
-          borderTop: `1px solid ${colors.border}`,
-          padding: "2rem 2.5rem",
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-          flexWrap: "wrap",
-          gap: "12px",
-        }}
-      >
+      <footer style={footerStyle}>
         <span
           style={{
             fontFamily: fonts.display,
@@ -58,6 +74,7 @@ function AppContent() {
         >
           SINE
         </span>
+
         <span
           style={{
             fontFamily: fonts.body,
@@ -67,7 +84,15 @@ function AppContent() {
         >
           © 2025 Sine Network. All rights reserved.
         </span>
-        <div style={{ display: "flex", gap: "1.5rem" }}>
+
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            gap: "1.5rem",
+            flexWrap: "wrap",
+          }}
+        >
           {["Privacy", "Terms", "Contact"].map((l) => (
             <a
               key={l}
@@ -82,6 +107,35 @@ function AppContent() {
               {l}
             </a>
           ))}
+
+          <span
+            style={{
+              width: "1px",
+              height: "14px",
+              background: colors.border,
+              display: "inline-block",
+            }}
+          />
+
+          <span style={creditStyle}>
+            Designed by
+            <a
+              href="https://github.com/azzayshakya"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={creditLinkStyle}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.color = colors.text;
+                e.currentTarget.style.borderColor = colors.textSecondary;
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.color = colors.textSecondary;
+                e.currentTarget.style.borderColor = colors.border;
+              }}
+            >
+              azzayshakya
+            </a>
+          </span>
         </div>
       </footer>
     </div>
