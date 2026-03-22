@@ -1,7 +1,6 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useTheme } from "../../theme/ThemeContext";
 import SectionWrapper from "./SectionWrapper";
-
 import Button from "../common/Button";
 import Toast from "../common/Toast";
 import { useAnimateOnScroll } from "../../hooks/useAnimateOnScroll";
@@ -22,6 +21,19 @@ function validate(data) {
 export default function ContactForm() {
   const { theme } = useTheme();
   const { colors, fonts, spacing, radius, transitions } = theme;
+
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+  const [isTablet, setIsTablet] = useState(window.innerWidth < 1024);
+
+  useEffect(() => {
+    const onResize = () => {
+      setIsMobile(window.innerWidth < 768);
+      setIsTablet(window.innerWidth < 1024);
+    };
+    window.addEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", onResize);
+  }, []);
+
   const [form, setForm] = useState(initial);
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
@@ -48,7 +60,6 @@ export default function ContactForm() {
       setErrors(errs);
       return;
     }
-
     setLoading(true);
     try {
       await submitContact(form);
@@ -106,38 +117,66 @@ export default function ContactForm() {
       label: "Full Name",
       type: "text",
       placeholder: "Aryan Kapoor",
+      span: false,
     },
     {
       key: "email",
       label: "Email Address",
       type: "email",
       placeholder: "aryan@example.com",
+      span: false,
     },
     {
       key: "phone",
       label: "Phone Number",
       type: "tel",
       placeholder: "+91 98765 43210",
+      span: false,
     },
     {
       key: "location",
       label: "Location",
       type: "text",
       placeholder: "Mumbai, India",
+      span: false,
     },
+  ];
+
+  /* ─── Responsive layout values ─── */
+
+  const outerGrid = {
+    display: "grid",
+    // Single column on mobile/tablet, side-by-side on desktop
+    gridTemplateColumns: isTablet ? "1fr" : "1fr 1.4fr",
+    gap: isMobile ? spacing.lg : spacing.xl,
+    alignItems: "start",
+  };
+
+  // Input fields: 2-col grid on ≥480px, single col on very small screens
+  const fieldsGrid = {
+    display: "grid",
+    gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr",
+    gap: spacing.sm,
+  };
+
+  const formCard = {
+    ...formAnim,
+    background: colors.bgCard,
+    border: `1px solid ${colors.border}`,
+    borderRadius: radius.xl,
+    padding: isMobile ? spacing.md : spacing.lg,
+  };
+
+  const contactInfoItems = [
+    { icon: "📧", label: "Email", value: "hello@sinenetwork.com" },
+    { icon: "📍", label: "Office", value: "Delhi, India" },
+    { icon: "🕐", label: "Response Time", value: "Within 24 hours" },
   ];
 
   return (
     <SectionWrapper id="contact" style={{ background: colors.bg }}>
-      <div
-        style={{
-          display: "grid",
-          gridTemplateColumns: "1fr 1.4fr",
-          gap: spacing.xl,
-          alignItems: "start",
-        }}
-      >
-        {/* Left side */}
+      <div style={outerGrid}>
+        {/* ── Left: info side ── */}
         <div ref={headRef} style={headAnim}>
           <p
             style={{
@@ -151,10 +190,13 @@ export default function ContactForm() {
           >
             Get In Touch
           </p>
+
           <h2
             style={{
               fontFamily: fonts.display,
-              fontSize: "clamp(2rem, 3.5vw, 3rem)",
+              fontSize: isMobile
+                ? "clamp(2rem, 8vw, 2.6rem)"
+                : "clamp(2rem, 3.5vw, 3rem)",
               fontWeight: 800,
               color: colors.text,
               margin: "0 0 20px",
@@ -166,6 +208,7 @@ export default function ContactForm() {
             <br />
             <span style={{ color: colors.highlight }}>about Sine.</span>
           </h2>
+
           <p
             style={{
               fontFamily: fonts.body,
@@ -173,97 +216,82 @@ export default function ContactForm() {
               lineHeight: 1.7,
               color: colors.textSecondary,
               margin: `0 0 ${spacing.lg}`,
+              maxWidth: isTablet ? "560px" : "unset",
             }}
           >
             Have a question, partnership inquiry, or want to learn more? Drop us
             a message and we'll respond within 24 hours.
           </p>
 
-          {[
-            { icon: "📧", label: "Email", value: "hello@sinenetwork.com" },
-            { icon: "📍", label: "Office", value: "Delhi, India" },
-            { icon: "🕐", label: "Response Time", value: "Within 24 hours" },
-          ].map((item) => (
-            <div
-              key={item.label}
-              style={{
-                display: "flex",
-                gap: "14px",
-                alignItems: "flex-start",
-                marginBottom: "20px",
-              }}
-            >
-              <div
-                style={{
-                  width: "42px",
-                  height: "42px",
-                  flexShrink: 0,
-                  borderRadius: radius.md,
-                  background: colors.surface,
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  fontSize: "1.1rem",
-                  border: `1px solid ${colors.border}`,
-                }}
-              >
-                {item.icon}
-              </div>
-              <div>
-                <div
-                  style={{
-                    fontFamily: fonts.body,
-                    fontSize: "0.8rem",
-                    color: colors.textTertiary,
-                    marginBottom: "2px",
-                    textTransform: "uppercase",
-                    letterSpacing: "0.05em",
-                  }}
-                >
-                  {item.label}
-                </div>
-                <div
-                  style={{
-                    fontFamily: fonts.body,
-                    fontSize: "0.95rem",
-                    color: colors.text,
-                    fontWeight: 500,
-                  }}
-                >
-                  {item.value}
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-
-        {/* Right side — form */}
-        <div
-          ref={formRef}
-          style={{
-            ...formAnim,
-            background: colors.bgCard,
-            border: `1px solid ${colors.border}`,
-            borderRadius: radius.xl,
-            padding: spacing.lg,
-          }}
-        >
+          {/* Contact info items — horizontal row on tablet (since layout is stacked), vertical on desktop */}
           <div
             style={{
-              display: "grid",
-              gridTemplateColumns: "1fr 1fr",
-              gap: spacing.sm,
+              display: "flex",
+              flexDirection: isTablet && !isMobile ? "row" : "column",
+              flexWrap: "wrap",
+              gap: isTablet && !isMobile ? spacing.lg : "20px",
             }}
           >
-            {fields.map((f) => (
+            {contactInfoItems.map((item) => (
               <div
-                key={f.key}
+                key={item.label}
                 style={{
-                  ...fieldGroup,
-                  gridColumn:
-                    f.key === "phone" || f.key === "location" ? "auto" : "auto",
+                  display: "flex",
+                  gap: "14px",
+                  alignItems: "flex-start",
                 }}
               >
+                <div
+                  style={{
+                    width: "42px",
+                    height: "42px",
+                    flexShrink: 0,
+                    borderRadius: radius.md,
+                    background: colors.surface,
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    fontSize: "1.1rem",
+                    border: `1px solid ${colors.border}`,
+                  }}
+                >
+                  {item.icon}
+                </div>
+                <div>
+                  <div
+                    style={{
+                      fontFamily: fonts.body,
+                      fontSize: "0.8rem",
+                      color: colors.textTertiary,
+                      marginBottom: "2px",
+                      textTransform: "uppercase",
+                      letterSpacing: "0.05em",
+                    }}
+                  >
+                    {item.label}
+                  </div>
+                  <div
+                    style={{
+                      fontFamily: fonts.body,
+                      fontSize: "0.95rem",
+                      color: colors.text,
+                      fontWeight: 500,
+                    }}
+                  >
+                    {item.value}
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* ── Right: form ── */}
+        <div ref={formRef} style={formCard}>
+          {/* 4 input fields in responsive grid */}
+          <div style={fieldsGrid}>
+            {fields.map((f) => (
+              <div key={f.key} style={fieldGroup}>
                 <label style={labelStyle}>{f.label}</label>
                 <input
                   type={f.type}
@@ -286,13 +314,14 @@ export default function ContactForm() {
             ))}
           </div>
 
+          {/* Message — always full width */}
           <div style={fieldGroup}>
             <label style={labelStyle}>Message</label>
             <textarea
               placeholder="Tell us what's on your mind..."
               value={form.message}
               onChange={set("message")}
-              rows={5}
+              rows={isMobile ? 4 : 5}
               style={{
                 ...inputStyle(!!errors.message),
                 resize: "vertical",
