@@ -45,32 +45,34 @@ export default function Button({
     animation: "spin 0.7s linear infinite",
     flexShrink: 0,
   };
-  //   <style>{`@keyframes spin { to { transform: rotate(360deg); } }`}</style>;
   return (
-    <button
-      type={type}
-      onClick={onClick}
-      disabled={disabled || loading}
-      style={base}
-      onMouseEnter={(e) => {
-        if (!disabled && !loading) {
+    <>
+      <style>{`@keyframes spin { to { transform: rotate(360deg); } }`}</style>
+      <button
+        type={type}
+        onClick={onClick}
+        disabled={disabled || loading}
+        style={base}
+        onMouseEnter={(e) => {
+          if (!disabled && !loading) {
+            e.currentTarget.style.background = isPrimary
+              ? colors.accentHover
+              : colors.surface;
+            e.currentTarget.style.transform = "translateY(-2px)";
+            e.currentTarget.style.boxShadow = theme.shadows.md;
+          }
+        }}
+        onMouseLeave={(e) => {
           e.currentTarget.style.background = isPrimary
-            ? colors.accentHover
-            : colors.surface;
-          e.currentTarget.style.transform = "translateY(-2px)";
-          e.currentTarget.style.boxShadow = theme.shadows.md;
-        }
-      }}
-      onMouseLeave={(e) => {
-        e.currentTarget.style.background = isPrimary
-          ? colors.accent
-          : "transparent";
-        e.currentTarget.style.transform = "translateY(0)";
-        e.currentTarget.style.boxShadow = "none";
-      }}
-    >
-      {loading && <span style={spinnerStyle} />}
-      {label}
-    </button>
+            ? colors.accent
+            : "transparent";
+          e.currentTarget.style.transform = "translateY(0)";
+          e.currentTarget.style.boxShadow = "none";
+        }}
+      >
+        {loading && <span style={spinnerStyle} />}
+        {label}
+      </button>
+    </>
   );
 }

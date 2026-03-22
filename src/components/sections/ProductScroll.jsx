@@ -4,7 +4,7 @@ import SectionWrapper from "./SectionWrapper";
 
 export default function ProductScroll() {
   const { theme } = useTheme();
-  const { colors, fonts, spacing, radius, shadows, transitions } = theme;
+  const { colors, fonts, spacing, radius, shadows } = theme;
 
   const { ref: sectionRef, inView } = useInView({
     threshold: 0.2,

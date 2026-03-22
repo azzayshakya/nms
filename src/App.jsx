@@ -1,5 +1,4 @@
 import { HelmetProvider, Helmet } from "react-helmet-async";
-import { ThemeProvider, useTheme } from "./theme/ThemeContext";
 import Navbar from "./components/layout/Navbar";
 
 import ProductShowcase from "./components/sections/Productshowcase";
@@ -10,6 +9,8 @@ import Benefits from "./components/sections/Benifits";
 import Reviews from "./components/sections/Review";
 import InterestCheck from "./components/sections/InterestCheck";
 import ContactForm from "./components/sections/ContactForm";
+import { useTheme } from "./theme/ThemeContext";
+import { ThemeProvider } from "./theme/ThemeProvider";
 
 function AppContent() {
   const { theme } = useTheme();

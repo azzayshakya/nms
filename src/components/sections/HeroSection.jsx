@@ -1,6 +1,5 @@
 import { useTheme } from "../../theme/ThemeContext";
 import { useAnimateOnScroll } from "../../hooks/useAnimateOnScroll";
-import SectionWrapper from "./SectionWrapper";
 
 export default function Hero() {
   const { theme } = useTheme();

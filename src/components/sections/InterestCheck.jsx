@@ -8,7 +8,7 @@ import SectionWrapper from "./SectionWrapper";
 
 export default function InterestCheck() {
   const { theme } = useTheme();
-  const { colors, fonts, spacing, radius, transitions } = theme;
+  const { colors, fonts, spacing, radius } = theme;
   const [loading, setLoading] = useState(null);
   const [done, setDone] = useState(false);
   const [toast, setToast] = useState(null);

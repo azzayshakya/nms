@@ -53,25 +53,28 @@ export default function Toast({ message, type = "success", onClose }) {
     padding: "0 0 0 12px",
   };
 
-  /* <style>{`
+  /*
+   */
+
+  return (
+    <>
+      <style>{`
         @keyframes toastIn {
           from { opacity: 0; transform: translateX(-50%) translateY(20px) scale(0.95); }
           to   { opacity: 1; transform: translateX(-50%) translateY(0)    scale(1); }
         }
       `}</style>
-       */
-
-  return (
-    <div role="alert" style={style}>
-      <span style={dotStyle} />
-      <span>{message}</span>
-      <button
-        style={closeStyle}
-        onClick={onClose}
-        aria-label="Close notification"
-      >
-        ×
-      </button>
-    </div>
+      <div role="alert" style={style}>
+        <span style={dotStyle} />
+        <span>{message}</span>
+        <button
+          style={closeStyle}
+          onClick={onClose}
+          aria-label="Close notification"
+        >
+          ×
+        </button>
+      </div>
+    </>
   );
 }
