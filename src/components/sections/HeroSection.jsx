@@ -285,7 +285,7 @@ export default function Hero() {
               </span>
             </div>
             <div ref={badgeRef} style={{ ...badgeAnim, ...badge }}>
-              New 2025
+              New 2026
             </div>
           </div>
         </div>

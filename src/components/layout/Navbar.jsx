@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useTheme } from "../../theme/ThemeContext";
-
+import logoImg from "../../assets/SN-2.png";
 export default function Navbar() {
   const { theme, isDark, toggle } = useTheme();
   const { colors, fonts, transitions, radius } = theme;
@@ -57,15 +57,15 @@ export default function Navbar() {
     boxSizing: "border-box",
   };
 
-  const logo = {
-    fontFamily: fonts.display,
-    fontSize: "1.3rem",
-    fontWeight: 700,
-    color: colors.text,
-    textDecoration: "none",
-    letterSpacing: "-0.02em",
-    zIndex: 1001,
-  };
+  // const logo = {
+  //   fontFamily: fonts.display,
+  //   fontSize: "1.3rem",
+  //   fontWeight: 700,
+  //   color: colors.text,
+  //   textDecoration: "none",
+  //   letterSpacing: "-0.02em",
+  //   zIndex: 1001,
+  // };
 
   const linkStyle = {
     fontFamily: fonts.body,
@@ -196,8 +196,23 @@ export default function Navbar() {
   return (
     <header>
       <nav style={nav} aria-label="Main navigation">
-        <a href="#hero" style={logo} onClick={() => setMenuOpen(false)}>
-          SINE
+        <a
+          href="/"
+          onClick={() => setMenuOpen(false)}
+          style={{
+            display: "flex",
+            alignItems: "center",
+          }}
+        >
+          <img
+            src={logoImg}
+            alt="logo"
+            style={{
+              height: "40px",
+              width: "50px",
+              maxWidth: "140px",
+            }}
+          />
         </a>
 
         {!isMobile && (

@@ -82,7 +82,7 @@ function AppContent() {
             color: colors.textTertiary,
           }}
         >
-          © 2025 Sine Network. All rights reserved.
+          © 2026 Sine Network. All rights reserved.
         </span>
 
         <div
