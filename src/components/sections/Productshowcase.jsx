@@ -1,37 +1,37 @@
 import { useTheme } from "../../theme/ThemeContext";
 import { useAnimateOnScroll } from "../../hooks/useAnimateOnScroll";
 import SectionWrapper from "./SectionWrapper";
-
+import image from "../../assets/products/neo-orbit/neo-orbit2.jpeg";
 const features = [
   {
     icon: "⚡",
     title: "Ultra-Fast Processing",
-    desc: "Powered by our latest chip architecture for blazing-fast response times.",
+    desc: "Powered by an ESP32 microcontroller for smooth performance and instant response across all on-device operations.",
   },
   {
     icon: "📡",
     title: "Smart Connectivity",
-    desc: "Dual-band WiFi 6E and Bluetooth 5.3 for seamless device pairing.",
+    desc: "Wi-Fi enabled for real-time data updates like weather, time, and environment — always connected, always current.",
   },
   {
     icon: "🔋",
-    title: "72hr Battery Life",
-    desc: "Advanced power management keeps you going through any adventure.",
+    title: "Optimized Battery Life",
+    desc: "Efficient power management ensures long-lasting performance for continuous daily use without frequent charging.",
   },
   {
-    icon: "🛡️",
-    title: "Military-Grade Build",
-    desc: "IP68 rated, drop-tested, built to withstand the toughest conditions.",
+    icon: "🔄",
+    title: "Always Synced",
+    desc: "Data refreshes automatically in the background, so what you see is always accurate and up to date.",
   },
   {
-    icon: "🎯",
-    title: "Precision Sensors",
-    desc: "Six-axis motion sensing with 0.1° accuracy for unmatched control.",
+    icon: "🎨",
+    title: "Custom UI Themes",
+    desc: "Switch between different dashboard layouts and color modes to match your setup and personal style.",
   },
   {
-    icon: "🔒",
-    title: "Secure by Design",
-    desc: "End-to-end encryption and biometric lock keep your data safe.",
+    icon: "👀",
+    title: "At-a-Glance Info",
+    desc: "Time, date, and weather visible instantly on your desk — no phone, no distractions, just what matters.",
   },
 ];
 
@@ -179,7 +179,7 @@ export default function ProductShowcase() {
       <div style={imgBox}>
         <div style={label}>Sine Device — Side View</div>
         {/* Replace with actual product image */}
-        <svg width="200" height="120" viewBox="0 0 200 120" fill="none">
+        {/* <svg width="200" height="120" viewBox="0 0 200 120" fill="none">
           <rect
             x="20"
             y="20"
@@ -202,7 +202,8 @@ export default function ProductShowcase() {
           />
           <circle cx="162" cy="60" r="8" fill={colors.border} />
           <circle cx="162" cy="60" r="4" fill={colors.surface} />
-        </svg>
+        </svg> */}
+        <img src={image} alt="" />
       </div>
 
       <div

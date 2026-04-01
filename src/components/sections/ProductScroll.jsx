@@ -240,7 +240,7 @@ import SectionWrapper from "./SectionWrapper";
 import { useState, useEffect } from "react";
 import { useTheme } from "../../theme/ThemeContext";
 import { useInView } from "react-intersection-observer";
-
+import image from "../../assets/products/neo-orbit/neo-orbit5.png";
 export default function ProductScroll() {
   const { theme } = useTheme();
   const { colors, fonts, spacing, radius, shadows } = theme;
@@ -353,8 +353,9 @@ export default function ProductScroll() {
         <div style={imgSide}>
           <div style={imgCard}>
             <div style={glowLayer} />
+            <img src={image} alt="" />
             {/* Replace SVG with: <img src="your-product.png" style={{ width: "85%", objectFit: "contain" }} alt="Sine Network Pro" /> */}
-            <svg
+            {/* <svg
               width={svgSize.width}
               height={svgSize.height}
               viewBox="0 0 240 300"
@@ -422,7 +423,7 @@ export default function ProductScroll() {
                 rx="2"
                 fill={colors.surface}
               />
-            </svg>
+            </svg> */}
 
             <div
               style={{
@@ -440,7 +441,7 @@ export default function ProductScroll() {
                 border: `1px solid ${colors.border}`,
               }}
             >
-              Sine Network Pro
+              Neo Orbit V1
             </div>
           </div>
         </div>
@@ -461,11 +462,11 @@ export default function ProductScroll() {
           </p>
 
           <h2 style={tagline}>
-            Precision
+            Real-Time
             <br />
-            <span style={{ color: colors.highlight }}>engineered.</span>
+            <span style={{ color: colors.highlight }}>Data ,</span>
             <br />
-            Beautifully made.
+            Futuristic Design.
           </h2>
 
           <p
@@ -477,8 +478,9 @@ export default function ProductScroll() {
               margin: `${spacing.md} 0`,
             }}
           >
-            Every curve, every component, every connection — obsessively refined
-            to deliver performance that you can feel the moment you pick it up.
+            neo orbit v1, this sculpture fetches local and global weather data,
+            sunrise/sunset times, humidity, and wind conditions, all in real
+            time using blynk iot.
           </p>
 
           {/* Specs table */}

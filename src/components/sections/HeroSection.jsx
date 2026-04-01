@@ -1,6 +1,6 @@
 import { useTheme } from "../../theme/ThemeContext";
 import { useAnimateOnScroll } from "../../hooks/useAnimateOnScroll";
-
+import image from "../../assets/products/neo-orbit/neo-orbit.jpeg";
 export default function Hero() {
   const { theme } = useTheme();
   const { colors, fonts, spacing, radius, transitions, shadows } = theme;
@@ -59,7 +59,7 @@ export default function Hero() {
 
   const headline = {
     fontFamily: fonts.display,
-    fontSize: "clamp(3rem, 6vw, 5.5rem)",
+    fontSize: "clamp(3rem, 6vw, 4rem)",
     fontWeight: 800,
     lineHeight: 1.0,
     letterSpacing: "-0.04em",
@@ -202,14 +202,14 @@ export default function Hero() {
             Introducing Sine Network
           </div>
           <h1 style={headline}>
-            Connect
-            <span style={highlight}>Beyond</span>
-            Limits.
+            Engineer
+            <span style={highlight}>Your</span>
+            Environment.
           </h1>
           <p style={sub}>
-            The next-generation electronic gadget engineered for precision,
-            speed, and seamless connectivity. Everything you need, nothing you
-            don't.
+            We craft handcrafted IoT devices blending electronics, design, and
+            real-time data to create intelligent, aesthetic products for modern
+            workspaces.
           </p>
           <div style={ctaRow}>
             <a
@@ -246,7 +246,7 @@ export default function Hero() {
           <div style={productImg}>
             <div style={productInner}>
               {/* Product image placeholder — replace with <img src="..." /> */}
-              <svg width="80" height="80" viewBox="0 0 80 80" fill="none">
+              {/* <svg width="80" height="80" viewBox="0 0 80 80" fill="none">
                 <rect
                   x="10"
                   y="20"
@@ -272,7 +272,8 @@ export default function Hero() {
                   rx="1"
                   fill={colors.border}
                 />
-              </svg>
+              </svg> */}
+              <img src={image} alt="" />
               <span
                 style={{
                   fontFamily: fonts.mono,

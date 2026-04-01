@@ -28,28 +28,28 @@ function useCountUp(target, duration = 1800, inView) {
 
 const benefits = [
   {
-    value: 10,
+    value: 24,
+    suffix: "/7",
+    label: "Live Data",
+    desc: "Always updating, always relevant.",
+  },
+  {
+    value: 100,
     suffix: "%",
-    label: "Below Market Price",
-    desc: "We cut the middleman so you get premium quality at a fraction of the cost.",
+    label: "Custom Built",
+    desc: "Hardware and software crafted from scratch.",
+  },
+  {
+    value: 360,
+    suffix: "°",
+    label: "Desk Presence",
+    desc: "Looks good from every angle.",
   },
   {
     value: 99,
     suffix: ".9%",
-    label: "Uptime Guarantee",
+    label: "Uptime",
     desc: "Built on a robust architecture that keeps you connected around the clock.",
-  },
-  {
-    value: 72,
-    suffix: "hr",
-    label: "Battery Life",
-    desc: "Three days of continuous use on a single charge — no compromises.",
-  },
-  {
-    value: 5,
-    suffix: "★",
-    label: "Average Rating",
-    desc: "Thousands of verified customers rate Sine Network at the very top.",
   },
 ];
 
