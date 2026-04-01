@@ -116,28 +116,28 @@ export default function ContactForm() {
       key: "name",
       label: "Full Name",
       type: "text",
-      placeholder: "Aryan Kapoor",
+      placeholder: "Enter your name.",
       span: false,
     },
     {
       key: "email",
       label: "Email Address",
       type: "email",
-      placeholder: "aryan@example.com",
+      placeholder: "Enter your email.",
       span: false,
     },
     {
       key: "phone",
       label: "Phone Number",
       type: "tel",
-      placeholder: "+91 98765 43210",
+      placeholder: "Enter your number.",
       span: false,
     },
     {
       key: "location",
       label: "Location",
       type: "text",
-      placeholder: "Mumbai, India",
+      placeholder: "Enter your location",
       span: false,
     },
   ];
@@ -168,7 +168,7 @@ export default function ContactForm() {
   };
 
   const contactInfoItems = [
-    { icon: "📧", label: "Email", value: "hello@sinenetwork.com" },
+    { icon: "📧", label: "Email", value: "sinenetwork0@gmail.com" },
     { icon: "📍", label: "Office", value: "Delhi, India" },
     { icon: "🕐", label: "Response Time", value: "Within 24 hours" },
   ];

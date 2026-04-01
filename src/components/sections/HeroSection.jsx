@@ -285,9 +285,9 @@ export default function Hero() {
                 SINE DEVICE
               </span>
             </div>
-            <div ref={badgeRef} style={{ ...badgeAnim, ...badge }}>
+            {/* <div ref={badgeRef} style={{ ...badgeAnim, ...badge }}>
               New 2026
-            </div>
+            </div> */}
           </div>
         </div>
       </div>

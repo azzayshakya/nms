@@ -79,38 +79,6 @@
 //     <SectionWrapper id="product" style={{ background: colors.bg }}>
 //       <div ref={sectionRef} style={grid}>
 //         <div style={textSide}>
-//           <p
-//             style={{
-//               fontFamily: fonts.mono,
-//               fontSize: "0.75rem",
-//               letterSpacing: "0.12em",
-//               textTransform: "uppercase",
-//               color: colors.textTertiary,
-//               marginBottom: "16px",
-//             }}
-//           >
-//             The Device
-//           </p>
-//           <h2 style={tagline}>
-//             Precision
-//             <br />
-//             <span style={{ color: colors.highlight }}>engineered.</span>
-//             <br />
-//             Beautifully made.
-//           </h2>
-//           <p
-//             style={{
-//               fontFamily: fonts.body,
-//               fontSize: "1rem",
-//               lineHeight: 1.7,
-//               color: colors.textSecondary,
-//               margin: `${spacing.md} 0`,
-//             }}
-//           >
-//             Every curve, every component, every connection — obsessively refined
-//             to deliver performance that you can feel the moment you pick it up.
-//           </p>
-
 //           <div>
 //             {specs.map((s, i) => (
 //               <div
@@ -334,17 +302,13 @@ export default function ProductScroll() {
     margin: 0,
   };
 
-  const specRow = (isLast) => ({
+  const specRow = {
     display: "flex",
     justifyContent: "space-between",
     alignItems: "center",
     padding: "14px 0",
-    borderBottom: isLast ? "none" : `1px solid ${colors.border}`,
-  });
-
-  const svgSize = isMobile
-    ? { width: 160, height: 200, scale: 0.67 }
-    : { width: 240, height: 300, scale: 1 };
+    borderBottom: `1px solid ${colors.border}`,
+  };
 
   return (
     <SectionWrapper id="product" style={{ background: colors.bg }}>
@@ -354,77 +318,6 @@ export default function ProductScroll() {
           <div style={imgCard}>
             <div style={glowLayer} />
             <img src={image} alt="" />
-            {/* Replace SVG with: <img src="your-product.png" style={{ width: "85%", objectFit: "contain" }} alt="Sine Network Pro" /> */}
-            {/* <svg
-              width={svgSize.width}
-              height={svgSize.height}
-              viewBox="0 0 240 300"
-              fill="none"
-            >
-              <rect
-                x="50"
-                y="20"
-                width="140"
-                height="260"
-                rx="20"
-                fill={colors.surface}
-                stroke={colors.border}
-                strokeWidth="1.5"
-              />
-              <rect
-                x="62"
-                y="38"
-                width="116"
-                height="200"
-                rx="10"
-                fill={colors.bgCard}
-                stroke={colors.border}
-                strokeWidth="1"
-              />
-              <rect
-                x="90"
-                y="30"
-                width="60"
-                height="4"
-                rx="2"
-                fill={colors.border}
-              />
-              <circle
-                cx="120"
-                cy="276"
-                r="10"
-                fill={colors.surface}
-                stroke={colors.border}
-                strokeWidth="1.5"
-              />
-              <circle cx="120" cy="276" r="5" fill={colors.border} />
-              <rect
-                x="75"
-                y="100"
-                width="90"
-                height="60"
-                rx="6"
-                fill={colors.surface}
-              />
-              <circle cx="90" cy="130" r="8" fill={colors.borderStrong} />
-              <rect
-                x="105"
-                y="122"
-                width="50"
-                height="6"
-                rx="3"
-                fill={colors.border}
-              />
-              <rect
-                x="105"
-                y="134"
-                width="36"
-                height="4"
-                rx="2"
-                fill={colors.surface}
-              />
-            </svg> */}
-
             <div
               style={{
                 position: "absolute",
@@ -484,17 +377,15 @@ export default function ProductScroll() {
           </p>
 
           {/* Specs table */}
-          <div
-            style={{
-              background: colors.bgCard,
-              border: `1px solid ${colors.border}`,
-              borderRadius: radius.md,
-              padding: isMobile ? "0 16px" : "0",
-              overflow: "hidden",
-            }}
-          >
+          <div>
             {specs.map((s, i) => (
-              <div key={s.label} style={specRow(i === specs.length - 1)}>
+              <div
+                key={s.label}
+                style={{
+                  ...specRow,
+                  ...(i === specs.length - 1 ? { borderBottom: "none" } : {}),
+                }}
+              >
                 <span
                   style={{
                     fontFamily: fonts.body,
