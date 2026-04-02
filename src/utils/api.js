@@ -1,25 +1,25 @@
-const BASE_URL = import.meta.env.VITE_API_URL || "https://api.f.com";
+import axios from "axios";
 
-async function request(endpoint, options = {}) {
-  const res = await fetch(`${BASE_URL}${endpoint}`, {
-    headers: { "Content-Type": "application/json", ...options.headers },
-    ...options,
-  });
-  if (!res.ok) {
-    const err = await res.json().catch(() => ({}));
-    throw new Error(err.message || "Something went wrong");
-  }
-  return res.json();
-}
+const API = axios.create({
+  baseURL: "http://localhost:5000/api",
+  headers: {
+    "Content-Type": "application/json",
+  },
+});
 
-export const submitInterest = (interested) =>
-  request("/interest", {
-    method: "POST",
-    body: JSON.stringify({ interested, timestamp: new Date().toISOString() }),
-  });
+export const submitQuery = async (data) => {
+  const res = await API.post("/query", data);
+  return res.data;
+};
 
-export const submitContact = (formData) =>
-  request("/contact", {
-    method: "POST",
-    body: JSON.stringify(formData),
-  });
+export const submitInterest = async (data) => {
+  const res = await API.post("/interest", data);
+  return res.data;
+};
+
+export const loginUser = async (data) => {
+  const res = await API.post("/auth/login", data);
+  return res.data;
+};
+
+export default API;

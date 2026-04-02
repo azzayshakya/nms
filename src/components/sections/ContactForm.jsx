@@ -4,7 +4,7 @@ import SectionWrapper from "./SectionWrapper";
 import Button from "../common/Button";
 import Toast from "../common/Toast";
 import { useAnimateOnScroll } from "../../hooks/useAnimateOnScroll";
-import { submitContact } from "../../utils/api";
+import { submitQuery } from "../../utils/api";
 
 const initial = { name: "", email: "", phone: "", message: "", location: "" };
 
@@ -62,7 +62,7 @@ export default function ContactForm() {
     }
     setLoading(true);
     try {
-      await submitContact(form);
+      await submitQuery(form);
       setSubmitted(true);
       setToast({
         type: "success",
@@ -137,7 +137,7 @@ export default function ContactForm() {
       key: "location",
       label: "Location",
       type: "text",
-      placeholder: "Enter your location",
+      placeholder: "Enter your location.",
       span: false,
     },
   ];

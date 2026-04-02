@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useTheme } from "../../theme/ThemeContext";
 import Button from "../common/Button";
 import Toast from "../common/Toast";
@@ -21,17 +21,53 @@ export default function InterestCheck() {
     "slideUp",
     150,
   );
+  const STORAGE_KEY = "interest_submitted";
 
   const handleClick = async (interested) => {
+    const stored = localStorage.getItem(STORAGE_KEY);
+
+    if (stored) {
+      const parsed = JSON.parse(stored);
+      const now = Date.now();
+
+      //  24 hours = 86400000 ms
+      if (now - parsed.time < 86400000) {
+        setToast({
+          type: "info",
+          message: "You have already responded. Try again after 24 hours.",
+        });
+        return;
+      } else {
+        // expired → remove old
+        localStorage.removeItem(STORAGE_KEY);
+      }
+    }
+
     setLoading(interested ? "yes" : "no");
+
     try {
-      await submitInterest(interested);
+      await submitInterest({
+        interest: interested,
+      });
+
+      // ✅ Save to localStorage
+      localStorage.setItem(
+        STORAGE_KEY,
+        JSON.stringify({
+          interest: interested,
+          time: Date.now(),
+        }),
+      );
+
       setDone(true);
+
       setToast({
         type: "success",
         message: "Thank you! We'll be in touch for a review. 🎉",
       });
-    } catch {
+    } catch (err) {
+      console.error(err);
+
       setToast({
         type: "error",
         message: "Something went wrong. Please try again.",
@@ -61,7 +97,20 @@ export default function InterestCheck() {
     background: `radial-gradient(ellipse, ${colors.highlight}10 0%, transparent 70%)`,
     pointerEvents: "none",
   };
+  useEffect(() => {
+    const stored = localStorage.getItem(STORAGE_KEY);
 
+    if (stored) {
+      const parsed = JSON.parse(stored);
+      const now = Date.now();
+
+      if (now - parsed.time < 86400000) {
+        setDone(true);
+      } else {
+        localStorage.removeItem(STORAGE_KEY);
+      }
+    }
+  }, []);
   return (
     <SectionWrapper id="interest" style={{ background: colors.bgSecondary }}>
       <div ref={headRef} style={headAnim}>
